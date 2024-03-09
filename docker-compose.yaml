@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  emqx:
+    image: emqx:latest
+    container_name: emqx-broker
+    environment:
+      - "EMQX_NAME=${EMQX_NAME}"
+      - "EMQX_HOST=${EMQX_HOST}"
+      - "EMQX_NODE_NAME=${EMQX_NAME}@${EMQX_HOSTIP}"
+      - "EMQX_NODE_COOKIE=${EMQX_NODE_COOKIE}"
+
+    healthcheck:
+      test: [ "CMD", "/opt/emqx/bin/emqx", "ctl", "status" ]
+      interval: 5s
+      timeout: 25s
+      retries: 5
+
+    ports:
+      - "${EMQX_MQTT_PORT}:1883"
+      - "${EMQX_HTTPS_PORT}:8083"
+      - "${EMQX_MQTT_WS_PORT}:8084"
+      - "${EMQX_MQTT_TLS_PORT}:8883"
+      - "${EMQX_ADMIN_PORT}:18083"
+    volumes:
+      - $PWD/data:/opt/emqx/data
+      - $PWD/log:/opt/emqx/log
+      - $PWD/etc:/opt/emqx/etc
+
+networks:
+  mqtt5-network:
+    driver: bridge
