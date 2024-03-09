@@ -25,7 +25,7 @@ services:
     volumes:
       - $PWD/data:/opt/emqx/data
       - $PWD/log:/opt/emqx/log
-      - $PWD/etc:/opt/emqx/etc
+      # - $PWD/etc:/opt/emqx/etc
 
 networks:
   mqtt5-network:
