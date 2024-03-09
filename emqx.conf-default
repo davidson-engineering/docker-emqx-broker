@@ -1,0 +1,7 @@
+node {
+  name = "emqx@127.0.0.1"
+  cookie = "mysecret"
+  cluster_call {
+    retry_interval  =  1m
+  }
+}

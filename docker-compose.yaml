@@ -17,16 +17,15 @@ services:
       retries: 5
 
     ports:
-      - "${EMQX_MQTT_PORT}:1883"
-      - "${EMQX_HTTPS_PORT}:8083"
-      - "${EMQX_MQTT_WS_PORT}:8084"
-      - "${EMQX_MQTT_TLS_PORT}:8883"
-      - "${EMQX_ADMIN_PORT}:18083"
+      - "1883:1883"
+      - "8083:8083"
+      - "8883:8883"
+      - "8084:8084"
+      - "18083:18083"
     volumes:
       - $PWD/data:/opt/emqx/data
       - $PWD/log:/opt/emqx/log
       - $PWD/etc:/opt/emqx/etc
-      - $PWD/conf:/opt/emqx/conf
 
 networks:
   mqtt5-network:
